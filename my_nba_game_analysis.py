@@ -32,8 +32,8 @@ def analyse_nba_game(play_by_play_moves):
     makes_free_throw = action_catch(r'([\S]. [\S]*) makes free throw . of .', data)
     misses_free_throw = action_catch(r'([\S]. [\S]*) misses free throw . of .', data)
     offensive_rebounds = action_catch(r'Offensive rebound by ([\S]. [\S]*)', data)
-    defensive_rebounds =  action_catch(r'Defensive rebound by ([\S]. [\S]*)', data)
-    assists = action_catch(r'assist by ([\S]. [\S]*^\))', data)
+    defensive_rebounds =  action_catch(r'Defensive rebound by ([\S]. [\S])', data)
+    assists = action_catch(r'assist by ([\S]. [\S])', data)
 
 
 
