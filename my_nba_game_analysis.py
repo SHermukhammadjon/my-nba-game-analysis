@@ -5,38 +5,30 @@ import nba
 data = open("nba_game_warriors_thunder_20181016.txt", "r")
 data = data.read()
 
+
 def analyse_nba_game(data):
     respons = {"home_team": {"name": None, "players_data": {}}, "away_team": {"name": None, "players_data": {}}}
-    nba.actions(data.split('\n'))
+    # nba.actions(data.split('\n'))
+    names = nba.get_names(data.split('\n'))
+
+    # print(len(names))
+    # for n in names:
+    #     print(n)
+
+    return names
+
+
+names = analyse_nba_game(data)
+print(names)
+print(len(names))
+
+
+def separate_team(names, nba_data):
+
+    respons = {"home_team": {"name": None, "players_data": {}}, "away_team": {"name": None, "players_data": {}}}
+    nba_data = nba_data.split("\n")
+    
+
     return respons
 
-
-
-
-
-def get_names(data):
-    data = data.split("\n")
-    playes_name = []
-    for action in data:
-            n = re.compile(r'([\S]\. [\S]*[^)])').search(action)
-            if n: 
-                playes_name.append(action[n.span()[0] : n.span()[1]])
-    return playes_name
-
-def filter_names(names):
-    filtered_names = []
-    for n in range(0, len(names)):
-        name = names.pop()
-        for name2 in names:
-            if name == name2:
-                names.remove(name)
-    print(names)
-
-
-names = get_names(data)
-
-filter_names(names)
-
-# print(f"LEN >> {len(names)}")
-# for name in names:
-#     print(name)
+separate_team(names, data)

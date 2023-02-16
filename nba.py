@@ -31,3 +31,19 @@ def actions(data):
     pf = action_catch(r'Personal foul by ([\S]. [\S]*)', data) # PF
 
     return {'3P' : mept3, '3PA' : mispt3, '2P' : mept2, '2PA' : mispt2, 'FT' : ft, 'FTA' : fta, 'ORB' : orb, 'DRB' : drb, 'AST' : ast, 'STL' : stl, 'BLK' : blk, 'TOV' : tov, 'PF' :pf}
+
+
+
+# def filter_names(names):
+#     return list(dict.fromkeys(names))
+
+def get_names(data):
+    players_name = []
+    for action in data:
+            n = re.compile(r'([\S]\. [\S]*[^)])').search(action)
+            if n: 
+                players_name.append(action[n.span()[0] : n.span()[1]].strip())
+    return list(dict.fromkeys(players_name))
+
+
+
