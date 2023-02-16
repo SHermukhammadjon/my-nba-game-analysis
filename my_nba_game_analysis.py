@@ -23,11 +23,20 @@ def get_names(data):
                 playes_name.append(action[n.span()[0] : n.span()[1]])
     return playes_name
 
-
+def filter_names(names):
+    filtered_names = []
+    for n in range(0, len(names)):
+        name = names.pop()
+        for name2 in names:
+            if name == name2:
+                names.remove(name)
+    print(names)
 
 
 names = get_names(data)
 
-print(f"LEN >> {len(names)}")
-for name in names:
-    print(name)
+filter_names(names)
+
+# print(f"LEN >> {len(names)}")
+# for name in names:
+#     print(name)
