@@ -38,13 +38,17 @@ def makes(series, match):
         return True
     return False
 
+def 
+
+
+
 def separate_team(names, nba_data):
 
     nba_data = split(nba_data)
     respons = {"home_team": {"name": nba_data[0][4], "players_data": {}}, "away_team": {"name": nba_data[0][3], "players_data": {}}}
 
     players = {nba_data[0][4] : [], nba_data[0][3] : []}
-    for name in names: 
+    for name in names:
         for series in nba_data:
             if makes(series, f"{name} makes 3-pt"):
                 players[series[2]].append(name)
@@ -58,9 +62,31 @@ def separate_team(names, nba_data):
             elif makes(series, f"{name} misses 2-pt"):
                 players[series[2]].append(name)
                 break
-            
+            elif makes(series, f"Defensive rebound by {name}"):
+                players[series[2]].append(name)
+                break
+            elif makes(series, f"Offensive rebound by {name}"):
+                players[series[2]].append(name)
+                break
+
     print(f"LEN >>> {len(players[nba_data[0][4]]) + len(players[nba_data[0][3]])}")
+
+    # print("founded names: ")
+    foundes = []
+    for n in players[nba_data[0][4]]:
+        foundes.append(n)
+    for n in players[nba_data[0][3]]:
+        foundes.append(n)
+
+    # print("\nnames: ")
+    for found in foundes:
+        for name in names:
+            if name == found:
+                names.remove(name)
+    print(f"names : {name}")
+    print(names)
     print(players)
+
     return respons
 
 request = separate_team(names, data)
