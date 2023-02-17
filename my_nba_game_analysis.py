@@ -38,15 +38,7 @@ def makes(series, match):
         return True
     return False
 
-def 
-
-
-
-def separate_team(names, nba_data):
-
-    nba_data = split(nba_data)
-    respons = {"home_team": {"name": nba_data[0][4], "players_data": {}}, "away_team": {"name": nba_data[0][3], "players_data": {}}}
-
+def wher_play(nba_data, names):
     players = {nba_data[0][4] : [], nba_data[0][3] : []}
     for name in names:
         for series in nba_data:
@@ -68,27 +60,50 @@ def separate_team(names, nba_data):
             elif makes(series, f"Offensive rebound by {name}"):
                 players[series[2]].append(name)
                 break
+    return players
 
-    print(f"LEN >>> {len(players[nba_data[0][4]]) + len(players[nba_data[0][3]])}")
 
-    # print("founded names: ")
-    foundes = []
-    for n in players[nba_data[0][4]]:
-        foundes.append(n)
-    for n in players[nba_data[0][3]]:
-        foundes.append(n)
+def separate_team(names, nba_data):
+    nba_data = split(nba_data)
+    respons = {"home_team": {"name": nba_data[0][4], "players_data": []}, "away_team": {"name": nba_data[0][3], "players_data": []}}
 
-    # print("\nnames: ")
-    for found in foundes:
-        for name in names:
-            if name == found:
-                names.remove(name)
-    print(f"names : {name}")
-    print(names)
-    print(players)
+    players = wher_play(nba_data, names)
+
+    teams = {nba_data[0][4] : [], nba_data[0][3] : []}
+    for team, players in players.items():
+        print(team)
+        n = 0
+        for player in players:
+            z = {"player_name": player, "FG": 0, "FGA": 0, "FG%": 0, "3P": 0, "3PA": 0, "3P%": 0, "FT": 0, "FTA": 0, "FT%": 0, "ORB": 0, "DRB": 0, "TRB": 0, "AST": 0, "STL": 0, "BLK": 0, "TOV": 0, "PF": 0, "PTS": 0}
+            # print(z)
+            teams[team].append(z)
+            # n+=1
+            # print(f'{n}. {player}')
+        
+    for key, value in teams.items():
+        print(f">>> {key.title()}")
+        for n in value:
+            print(n)
+
+    # print(f"LEN >>> {len(players[nba_data[0][4]]) + len(players[nba_data[0][3]])}")
+
+    # print(players)
 
     return respons
 
+
+
+
+
+
 request = separate_team(names, data)
 
-# print(request)
+# for key, value in request.items():
+#     print(f">>> {key.title()}: ")
+#     i = 0
+#     for key1, value1 in value.items():
+#         print(f"{key1.title()}: ")
+#         i += 1
+#         if i != 1:
+#             for n in value1:
+#                 print(n)
