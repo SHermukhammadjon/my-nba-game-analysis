@@ -26,7 +26,6 @@ def split(csv_data):
 
 
 def makes(series, match):
-    # match = f"{name} makes 3-pt"
     respons = re.search(match, series[-1])
     if respons:
         return True
@@ -68,7 +67,6 @@ def separate_team(names, nba_data):
 
     teams = {nba_data[0][4] : [], nba_data[0][3] : []}
     for team, players in players.items():
-        # print(team)
         n = 0
         for player in players:
             z = {"player_name": player, "FG": 0, "FGA": 0, "FG%": 0, "3P": 0, "3PA": 0, "3P%": 0, "FT": 0, "FTA": 0, "FT%": 0, "ORB": 0, "DRB": 0, "TRB": 0, "AST": 0, "STL": 0, "BLK": 0, "TOV": 0, "PF": 0, "PTS": 0}
@@ -76,23 +74,10 @@ def separate_team(names, nba_data):
             teams[team].append(z)
             # n+=1
             # print(f'{n}. {player}')
-
     for key, value in teams.items():
         team = {"name": key, "players_data": value}
-        # print(team)
         if respons["home_team"]["name"] == key:
             respons["home_team"]["players_data"] = team["players_data"]
         if respons["away_team"]["name"] == key:
             respons["away_team"]["players_data"] = team["players_data"]
-   
-
-
-        # print(f">>> {key.title()}")
-        # for n in value:
-        #     print(n)
-
-    # print(f"LEN >>> {len(players[nba_data[0][4]]) + len(players[nba_data[0][3]])}")
-
-    # print(players)
-
     return respons
