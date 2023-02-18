@@ -10,7 +10,7 @@ def action_catch(match, data):
     return respons
 
 
-def actions(data):
+def get_actions(data):
     mept3 = action_catch(r'([\S]. [\S]*) makes 3-pt jump shot from', data)   # 3P
     mispt3 = action_catch(r'([\S]. [\S]*) misses 3-pt jump shot from', data) # 3PA
 
