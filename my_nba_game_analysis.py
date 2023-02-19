@@ -2,17 +2,53 @@ import re
 from action import get_actions, get_names
 from separate import consil, separate_team
 
+def box(word, size):
+    box = str(word)
+    while len(box) != size:
+        if len(box) < size:
+            box = box + " "
+        elif len(box) > size:
+            box = box[0:-2]
+
+    return box
+
+
+def column(series):
+    n=0
+    for key in series.keys():
+        n+=1
+        if n == 1:
+            print(box(key, 15), end = "|")
+        else:
+            print(box(key, 5), end = "|")
+    print()
+
+def series(series):
+    n = 0
+    for key, value in series.items():
+        # print(type(value), end = " ")
+        n+=1
+        if n == 1:
+            print(box(value, 15), end = "|")
+        else:
+            print(box(value, 5), end = "|")
+    print()
+        
+
 def print_nba_game_stats(team_dict):
     for home_or_away, team in team_dict.items():
         print(f">>> \n{home_or_away}\n")
-        # print(team)
         n = 0
         for team_name, players_data in team.items():
             n += 1
-            # print("n: ", n)
             if n != 1:
+                z = 0
                 for player in players_data:
-                    print(player)
+                    z+=1
+                    if z == 1:
+                        column(player)
+                        
+                    series(player)
             else:
                 print(team_name)
                 print(team[team_name])
