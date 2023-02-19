@@ -77,39 +77,23 @@ def count(nba_game, action, n_key, a_key):
 
 def loader_action(nba_game, action):
     nba_game = count(nba_game, action, '3P', '3P')
-    nba_game = count(nba_game, action, 'FG', '2P')
     nba_game = count(nba_game, action, '3PA', '3PA')
+    nba_game = count(nba_game, action, 'FG', '2P')
+    nba_game = count(nba_game, action, 'FGA', '2PA')
+    nba_game = count(nba_game, action, 'FT', 'FT')
+    nba_game = count(nba_game, action, 'FTA', 'FTA')
+    nba_game = count(nba_game, action, 'ORB', 'ORB')
+    nba_game = count(nba_game, action, 'DRB', 'DRB')
+    nba_game = count(nba_game, action, 'AST', 'AST')
+    nba_game = count(nba_game, action, 'STL', 'STL')
+    nba_game = count(nba_game, action, 'BLK', 'BLK')
+    nba_game = count(nba_game, action, 'TOV', 'TOV')
+    nba_game = count(nba_game, action, 'PF', 'PF')
+    
 
 
-    print_nba_game_stats(nba_game)
-
-    # print("actions: \n")
-    # for act in action:
-    #     print(act)
-
-    # # consil(nba_game)
-    # for key, team in nba_game.items():
-    #     # print(key)
-    #     # print(team)
-    #     for player_data in team['players_data']:
-    #         print(player_data['player_name'], end = "")
-    #         name = player_data['player_name']
-
-    #         for act in action['3P']:
-    #             found = re.search(name, act)
-    #             if found:
-    #                 player_data["3P"] = player_data["3P"] + 1
-    #                 # print(act)
-
-    #         print(f" make 3pt : {player_data['3P']}")
-
-
-    # print("___________")
-    # for n in action['3P']:
-    #     print(n)
-
-
-
+    # print_nba_game_stats(nba_game)
+    return nba_game
 
 # UPLOAD DATA
 data = open("nba_game_warriors_thunder_20181016.txt", "r")
@@ -119,13 +103,13 @@ def analyse_nba_game(data):
     actions = get_actions(data.split('\n'))
     names = get_names(data.split('\n'))
     respons = separate_team(names, data)
-    loader_action(respons, actions)
+    respons = loader_action(respons, actions)
 
     return respons
 
 
 respons = analyse_nba_game(data)
-
+print_nba_game_stats(respons)
 
 # print(respons)
 
