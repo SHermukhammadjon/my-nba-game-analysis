@@ -1,20 +1,5 @@
 import re
 
-
-def consil(respons):
-    for key, value in respons.items():
-        print(f">>> {key.title()}:  ")
-        i = 0
-        for key1, value1 in value.items():
-            print(f"{key1.title()}: ")
-            i += 1
-            if i == 1:
-                print(value1)
-            if i != 1:
-                for n in value1:
-                    print(n)
-
-
 def split(csv_data):
     table = []
     for data in csv_data.split("\n"):

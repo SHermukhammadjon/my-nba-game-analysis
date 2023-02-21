@@ -35,3 +35,49 @@ def loader_action(nba_game, action):
 
     # print_nba_game_stats(nba_game)
     return nba_game
+
+
+def do_it(nba_data, lable):
+    lable = lable.split(".")
+    equal, key1, do, key2 = lable[0], lable[1], lable[2], lable[3]
+    for home_or_away, team_data in nba_data.items():
+        for player_index in range(len(team_data['players_data'])):
+            if key2.isnumeric():
+                if do == "+":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] + int(key2)
+                elif do == "-":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] - int(key2)
+                elif do == "*":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] * int(key2)
+                elif do == "/":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] / int(key2)
+                # print(nba_data[home_or_away]['players_data'][player_index])
+            else:
+                if do == "+":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] + nba_data[home_or_away]['players_data'][player_index][key2]
+                elif do == "-":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] - nba_data[home_or_away]['players_data'][player_index][key2]
+                elif do == "*":
+                    nba_data[home_or_away]['players_data'][player_index][equal] += nba_data[home_or_away]['players_data'][player_index][key1] * nba_data[home_or_away]['players_data'][player_index][key2]
+                elif do == "/":
+                    if nba_data[home_or_away]['players_data'][player_index][key1] != 0 and nba_data[home_or_away]['players_data'][player_index][key2] != 0:
+                        nba_data[home_or_away]['players_data'][player_index][equal] = nba_data[home_or_away]['players_data'][player_index][key1] / nba_data[home_or_away]['players_data'][player_index][key2]
+                # print(nba_data[home_or_away]['players_data'][player_index])
+    return nba_data
+          
+def to_fill(respons):
+    respons = do_it(respons, "PTS.3P.*.3")
+    respons = do_it(respons, "PTS.FG.*.2")
+    respons = do_it(respons, "PTS.FT.+.0")
+
+    respons = do_it(respons, "FGA.FG.+.0")
+    respons = do_it(respons, "3PA.3P.+.0")
+    respons = do_it(respons, "FGA.3PA.+.0")
+    respons = do_it(respons, "FG.3P.+.0")
+
+    respons = do_it(respons, "FG%.FG./.FGA")
+    respons = do_it(respons, "FTA.FT.+.0")
+
+    respons = do_it(respons, "FT%.FT./.FTA")
+    respons = do_it(respons, "TRB.ORB.+.DRB")
+    return respons
