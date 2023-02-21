@@ -134,9 +134,10 @@ def analyse_nba_game(data):
     respons = do_it(respons, "FG.3P.+.0")
 
     respons = do_it(respons, "FG%.FG./.FGA")
-    # respons = do_it(respons, "F%.FG%./.100")
+    respons = do_it(respons, "FTA.FT.+.0")
 
-    # respons = do_it(respons, "FGA.FTA.+.3PA")
+    respons = do_it(respons, "FT%.FT./.FTA")
+    respons = do_it(respons, "TRB.ORB.+.DRB")
 
     # print_nba_game_stats(respons)
 
