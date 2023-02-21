@@ -17,8 +17,8 @@ def get_actions(data):
     mept2 = action_catch(r'([\S]. [\S]*) makes 2-pt', data)   # 2P
     mispt2 = action_catch(r'([\S]. [\S]*) misses 2-pt', data) # 2PA
 
-    ft = action_catch(r'([\S]. [\S]*) makes free throw . of .', data)   # FT
-    fta = action_catch(r'([\S]. [\S]*) misses free throw . of .', data) # FTA
+    ft = action_catch(r'([\S]. [\S]*) makes free throw', data)   # FT
+    fta = action_catch(r'([\S]. [\S]*) misses free throw', data) # FTA
 
     orb = action_catch(r'Offensive rebound by ([\S]. [\S]*)', data)    # ORB
     drb =  action_catch(r'Defensive rebound by ([\S]. [\S]*)', data)   # DRB
