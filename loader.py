@@ -80,4 +80,6 @@ def to_fill(respons):
 
     respons = do_it(respons, "FT%.FT./.FTA")
     respons = do_it(respons, "TRB.ORB.+.DRB")
+
+    respons = do_it(respons, "3P%.3P./.3PA")
     return respons
