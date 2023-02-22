@@ -26,7 +26,7 @@ def print_nba_game_stats(team_dict):
 
 
 # UPLOAD DATA
-data = open("nba_game_warriors_thunder_20181016.txt", "r")
+data = open("nba_game_blazers_lakers_20181018.txt", "r")
 data = data.read()
 
 def analyse_nba_game(data):
